@@ -24,7 +24,7 @@ const randomFunc = {
 //generate password function
 function generatePasword(lower, upper, number, symbol, length) {
 
-  let generateedPassword = '';
+  let generatedPassword = '';
 
   const typesCount = lower + upper + number + symbol;
 
@@ -110,7 +110,7 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-generatebtn.addEventListener("click", () => {
+generateBtn.addEventListener("click", () => {
 	const length = +lengthEl;
 	const hasLower = lowercaseEl;
 	const hasUpper = uppercaseEl;
