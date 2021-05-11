@@ -1,97 +1,105 @@
 // Assignment code here
 
-//DOM Elements
-const resultEl = document.getElementById('result');
-const lengthEl = document.getElementById('length');
-const uppercaseEl = document.getElementById('uppercase');
-const lowercaseEl = document.getElementById('lowercase');
-const numbersEl = document.getElementById('numbers');
-const symbolsEl = document.getElementById('symbols');
-const generateEl = document.getElementById('generate');
 
+// Arm's Tutoring version 
 
+const lower = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m", "n", "o", "p", "q", "r", "s", "t", "u", "v", "w", "x", "y", "z"]
+const upper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
+const number = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
+const symbol = [ '@', '%', '+', '\\', '/', "'", '!', '#', '$', '^', '?', ':', ',', ')', '(', '}', '{', ']', '[', '~', '-', '_', '.']
 
-const randomFunc = {
-  lower: getRandomLower,
-  upper: getRandomUpper,
-  number: getRandomNumber,
-  symbol: getRandomSymbol
-};
+  // function that gets the password options
+  function getPasswordOptions() {
+      var length = parseInt(prompt('What number of characters do you want your password to be?')
+      )
+      // we want to do a few checks regarding the password length, so we're going to use conditional statements
+      if (Number.isNaN(length)) {
+          alert("IT MUST BE A NUMBER!")
+          return null;
+      }
+      if (length > 128) {
+        alert("password needs to be shorter than 128")
+        return null;
+    }
+      if (length < 8) {
+          alert("password needs to be longer than 8")
+          return null;
+      }
+      // a boolean (true or false)
+    var hasNumber = confirm("Select ok if you want numbers in your password");
+    var hasLower = confirm("Select ok if you want Lower case in your password");
+    var hasUpper = confirm("Select ok if you want Upper case in your password");
+    var hasSymbol = confirm("Select ok if you want symbols in your password");
+// using the boolean here to make sure at least one of these options is selected
+if (
+    hasNumber === false && hasLower === false && hasSymbol === false && hasUpper === false
+) {
+    alert("select at least one character type!")
+    return null;
 
+}
 
+// need some kind of storage so we can access later
+// object 
+var passwordResponse = {
+    length: length,
+    hasNumber: hasNumber,
+    hasLower: hasLower,
+    hasUpper: hasUpper,
+    hasSymbol: hasSymbol,
+}
 
-
-//generate password function
-function generatePasword(lower, upper, number, symbol, length) {
-
-  let generatedPassword = '';
-
-  const typesCount = lower + upper + number + symbol;
-
-  //console.log('typesCount: ', typesCount);
-
-  const typesArr = [{ lower }, { upper }, { number }, { symbol }].filter
-  (
-    item => Object.values(item) [0]
-  );
-
-  //console.log( 'typesArr:', typesArr);
-
-  if(typesCount ===0) {
-    return '';
+return passwordResponse;
   }
 
-    for(let i = 0; i < length; i += typesCount) {
-      typesArr.forEach(type => {
-       const funcName = Object.keys(type) [0];
+  //a function to get the random elements 
+  function randomGenerator(arr) {
+      var randIndex = Math.floor(Math.random() * arr.length);
+      var randomChar = arr[randIndex];
 
-       generatedPassword += randomFunc[funcName]();
-      });
+      return randomChar;
   }
+  // function to generate the password when the user inputs it
 
-  const finalPassword = generatedPassword.slice(0, length);
+  function userPassword() {
+    var results = [];
+    var characters = [];
+    var actualCharacters = [];
 
-  return finalPassword;
-}
-// Assignment code here
-//generate password function
-//generate funtions
-function getRandomLower() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) +97);
-}
+    var selections = getPasswordOptions();
+    if (selections.hasNumber) {
+        // concatatenation means adding
+        characters = characters.concat(number)
+        actualCharacters.push(randomGenerator(number))
+    }
+    if (selections.hasSymbol) {
+            characters = characters.concat(symbol)
+            actualCharacters.push(randomGenerator(symbol))
+    }
+    if (selections.hasLower) {
+                characters = characters.concat(lower)
+                actualCharacters.push(randomGenerator(lower))
+    }
+    if (selections.hasUpper) {
+                    characters = characters.concat(upper)
+                    actualCharacters.push(randomGenerator(upper))
+    }
+    // do this conditional for all of them 
 
-function getRandomUpper() {
-  return String.fromCharCode(Math.floor(Math.random() * 26) +97);
-}
-function getRandomNumber() {
-  return String.fromCharCode(Math.floor(Math.random() * 10) +128);
-}
+   
 
-function getRandomSymbol() {
-  const Symbols = '!@#$%^&*":'
-  return symbols[Math.floor(Math.random() * symbols.length)];
-}
+    for ( var i=0; i < selections.length; i++) {
+        var character = getRandom(character);
+        results.push(character);
+    }
 
-
+    for (var i=0; i < actualCharacters.length; i++) {
+        result[i] = actualCharacters[i];
+    }
+    return results.join('')
 
 
-function generatePassword(length, lower, upper, number, symbol) {
-	let generatedPassword = "";
-	const typesCount = lower + upper + number + symbol;
-	const typesArr = [{ lower }, { upper }, { number }, { symbol }].filter(item => Object.values(item)[0]);
-	if (typesCount === 0) {
-		return "";
-	}
-	for (let i = 0; i < length; i++) {
-		typesArr.forEach(type => {
-			const funcName = Object.keys(type)[0];
-			generatedPassword += randomFunc[funcName]();
-		});
-	}
-	return generatedPassword.slice(0, length)
-									.split('').sort(() => Math.random() - 0.5)
-									.join('');
-}
+  }
 
 
 
@@ -110,13 +118,5 @@ function writePassword() {
 }
 
 // Add event listener to generate button
-generateBtn.addEventListener("click", () => {
-	const length = +lengthEl;
-	const hasLower = lowercaseEl;
-	const hasUpper = uppercaseEl;
-	const hasNumber = numbersEl;
-	const hasSymbol = symbolsEl;
-	generatedPassword = true;
-	resultEl.innerText = generatePassword(length, hasLower, hasUpper, hasNumber, hasSymbol);
-	
-});
+generateBtn.addEventListener("click", writePassword);
+    
