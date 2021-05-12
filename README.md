@@ -30,6 +30,11 @@ What I did
 
 
 
+![image](https://user-images.githubusercontent.com/82131327/117915952-1b24be80-b29b-11eb-8f26-9f366d407982.png)
+![image](https://user-images.githubusercontent.com/82131327/117915994-2e378e80-b29b-11eb-91be-6e9ec222d3e7.png)
+![image](https://user-images.githubusercontent.com/82131327/117916032-3bed1400-b29b-11eb-912c-142804f2b35f.png)
+![image](https://user-images.githubusercontent.com/82131327/117916131-65a63b00-b29b-11eb-8f59-fb5c22d925a0.png)
+![image](https://user-images.githubusercontent.com/82131327/117916170-7656b100-b29b-11eb-8c2d-f7adf41c51a8.png)
 
 
 
