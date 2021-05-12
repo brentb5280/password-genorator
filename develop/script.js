@@ -7,7 +7,7 @@ const lower = [ "a", "b", "c", "d", "e", "f", "g", "h", "i", "j", "k", "l", "m",
 const upper = ["A", "B", "C", "D", "E", "F", "G", "H", "I", "J", "K", "L", "M", "N", "O", "P", "Q", "R", "S", "T", "U", "V", "W", "X", "Y", "Z"]
 const number = ['0', '1', '2', '3', '4', '5', '6', '7', '8', '9']
 const symbol = [ '@', '%', '+', '\\', '/', "'", '!', '#', '$', '^', '?', ':', ',', ')', '(', '}', '{', ']', '[', '~', '-', '_', '.']
-
+var typeCount= 0;
   // function that gets the password options
   function getPasswordOptions() {
       var length = parseInt(prompt('What number of characters do you want your password to be?')
@@ -30,6 +30,8 @@ const symbol = [ '@', '%', '+', '\\', '/', "'", '!', '#', '$', '^', '?', ':', ',
     var hasLower = confirm("Select ok if you want Lower case in your password");
     var hasUpper = confirm("Select ok if you want Upper case in your password");
     var hasSymbol = confirm("Select ok if you want symbols in your password");
+    typeCount = hasNumber+hasLower+hasUpper+hasSymbol;
+
 // using the boolean here to make sure at least one of these options is selected
 if (
     hasNumber === false && hasLower === false && hasSymbol === false && hasUpper === false
@@ -61,48 +63,73 @@ return passwordResponse;
   }
   // function to generate the password when the user inputs it
 
-  function userPassword() {
+  function generatePassword() {
     var results = [];
     var characters = [];
     var actualCharacters = [];
 
     var selections = getPasswordOptions();
-    if (selections.hasNumber) {
-        // concatatenation means adding
-        characters = characters.concat(number)
-        actualCharacters.push(randomGenerator(number))
-    }
-    if (selections.hasSymbol) {
-            characters = characters.concat(symbol)
-            actualCharacters.push(randomGenerator(symbol))
-    }
-    if (selections.hasLower) {
-                characters = characters.concat(lower)
-                actualCharacters.push(randomGenerator(lower))
-    }
-    if (selections.hasUpper) {
-                    characters = characters.concat(upper)
-                    actualCharacters.push(randomGenerator(upper))
-    }
+    // if (selections.hasNumber) {
+    //     // concatatenation means adding
+    //     characters = characters.concat(number)
+    //     actualCharacters.push(randomGenerator(number))
+    // }
+    // if (selections.hasSymbol) {
+    //         characters = characters.concat(symbol)
+    //         actualCharacters.push(randomGenerator(symbol))
+    // }
+    // if (selections.hasLower) {
+    //             characters = characters.concat(lower)
+    //             actualCharacters.push(randomGenerator(lower))
+    // }
+    // if (selections.hasUpper) {
+    //                 characters = characters.concat(upper)
+    //                 actualCharacters.push(randomGenerator(upper))
+    // }
     // do this conditional for all of them 
 
-   
 
-    for ( var i=0; i < selections.length; i++) {
-        var character = getRandom(character);
-        results.push(character);
+    //debugger;
+    for ( var i=0; i<selections.length; i+=typeCount){
+        if (selections.hasNumber) {
+            // concatatenation means adding
+            characters = characters.concat(number)
+            actualCharacters.push(randomGenerator(number))
+        }
+        if (selections.hasSymbol) {
+                characters = characters.concat(symbol)
+                actualCharacters.push(randomGenerator(symbol))
+        }
+        if (selections.hasLower) {
+                    characters = characters.concat(lower)
+                    actualCharacters.push(randomGenerator(lower))
+        }
+        if (selections.hasUpper) {
+                        characters = characters.concat(upper)
+                        actualCharacters.push(randomGenerator(upper))
+        }
     }
+    // for ( var i=0; i < selections.length; i++) {
+    //     var characters = getRandom(characters);
+    //     results.push(characters);
+    // }
 
-    for (var i=0; i < actualCharacters.length; i++) {
-        result[i] = actualCharacters[i];
-    }
-    return results.join('')
+    // for (var i=0; i < actualCharacters.length; i++) {
+    //     result[i] = actualCharacters[i];
+    // }
+    //return results.join('')
+    return actualCharacters;
+}
+
+function getRandom(){
+
+}
+
+  
 
 
-  }
 
-
-
+//function generatePassword(){}
 
 
 // Get references to the #generate element
